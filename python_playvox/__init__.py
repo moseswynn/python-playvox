@@ -1,11 +1,12 @@
 __version__ = '0.1.0'
 import requests
 
+
 class Playvox:
     def __init__(self, pv_subdomain, uid, key):
         self.auth = (uid, key)
         self.url = 'https://{}.playvox.com/api/v1/'.format(pv_subdomain)
-    
+
     def make_request(self, method='GET', endpoint=None, data=None):
         if method = 'GET':
             return requests.get(self.url+endpoint, auth=self.auth).json()
@@ -20,22 +21,22 @@ class Playvox:
             raise ValueError(error_message)
 
     def make_querystring(parameters)
-        querystring = '?'
-        [querystring.append(k+'='+str(v)) for k,v in parameters]
-        return querystring
+    querystring = '?'
+    [querystring.append(k+'='+str(v)) for k, v in parameters]
+    return querystring
 
     def get_coachings(self, **kwargs):
-        endpoint='coachings'
+        endpoint = 'coachings'
         if len(kwargs) > 0:
             endpoint.append(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
-        
+
     def get_learning_sessions(self, **kwargs):
         endpoint = 'learning-results'
         if len(kwargs) > 0:
             endpoint.append(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
-    
+
     def get_campaigns(self, **kwargs):
         endpoint = 'campaigns'
         if len(kwargs) > 0:
@@ -56,7 +57,7 @@ class Playvox:
 
     def send_campaign_data(self, campaign_id, campaign_data):
         endpoint = 'campaigns/{}/metrics'.format(campaign_id)
-        return self.make_request(method='POST',endpoint=endpoint,data=campaign_data)
+        return self.make_request(method='POST', endpoint=endpoint, data=campaign_data)
 
     def get_calibrations(self, **kwargs):
         endpoint = 'calibrations'
@@ -69,13 +70,13 @@ class Playvox:
         if len(kwargs) > 0:
             endpoint.append(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
-    
+
     def get_scorecards(self, **kwargs):
         endpoint = 'scorecards'
         if len(kwargs) > 0:
             endpoint.append(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
-    
+
     def get_teams(self, **kwargs):
         endpoint = 'teams'
         if len(kwargs) > 0:
@@ -84,26 +85,26 @@ class Playvox:
 
     def create_new_team(self, team_dict):
         endpoint = 'teams'
-        return self.make_request(method='POST',endpoint=endpoint,data=team_dict)
+        return self.make_request(method='POST', endpoint=endpoint, data=team_dict)
 
     def update_team(self, team_id, team_dict):
         endpoint = 'teams/{}'.format(team_id)
-        return self.make_request(method='POST',endpoint=endpoint,data=team_dict)
+        return self.make_request(method='POST', endpoint=endpoint, data=team_dict)
 
     def add_team_user(self, team_id, user_id):
         endpoint = 'teams/{}/users'
         data = {
             "id": user_id
         }
-        return self.make_request(method='POST',endpoint=endpoint,data=data)
+        return self.make_request(method='POST', endpoint=endpoint, data=data)
 
     def remove_team_user(self, team_id, user_id):
-        endpoint = 'teams/{}/users/{}'.format(team_id,user_id)
-        return self.make_request(method='DELETE',endpoint=endpoint)
+        endpoint = 'teams/{}/users/{}'.format(team_id, user_id)
+        return self.make_request(method='DELETE', endpoint=endpoint)
 
     def delete_team(self, team_id):
         endpoint = 'teams/{}'.format(team_id)
-        return self.make_request(method='DELETE',endpoint=endpoint)
+        return self.make_request(method='DELETE', endpoint=endpoint)
 
     def get_users(self, **kwargs):
         endpoint = 'users'
@@ -113,15 +114,15 @@ class Playvox:
 
     def create_user(self, user_dict):
         endpoint = 'users'
-        return self.make_request(method='POST',endpoint=endpoint,data=user_dict)
+        return self.make_request(method='POST', endpoint=endpoint, data=user_dict)
 
     def update_user(self, user_id, user_dict):
         endpoint = 'users/{}'.format(user_id)
-        return self.make_request(method='POST',endpoint=endpoint,data=user_dict)
+        return self.make_request(method='POST', endpoint=endpoint, data=user_dict)
 
     def deactivate_user(self, user_id, user_dict):
         endpoint = 'users/{}'.format(user_id)
-        return self.make_request(method='POST',endpoint=endpoint,data=user_dict)
+        return self.make_request(method='POST', endpoint=endpoint, data=user_dict)
 
     def activate_user(self, user_id):
         endpoint = 'users/{}'.format(user_id)
@@ -130,41 +131,43 @@ class Playvox:
             "deactivation_type": "",
             "deactivation_reason": ""
         }
-        return self.make_request(method='POST',endpoint=endpoint,data=data)
+        return self.make_request(method='POST', endpoint=endpoint, data=data)
 
     def get_roles(self, **kwargs):
         endpoint = 'roles'
         if len(kwargs) > 0:
             endpoint.append(make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
-    
+
     def get_integrations(self):
-        endpoint='integrations'
+        endpoint = 'integrations'
         return self.make_request(endpoint=endpoint)
-    
+
     def create_integration(self, integration_dict):
-        endpoint='integrations'
-        return self.make_request(method='POST',endpoint=endpoint,data=integration_dict)
+        endpoint = 'integrations'
+        return self.make_request(method='POST', endpoint=endpoint, data=integration_dict)
 
     def update_integration(self, integration_id, integration_dict):
         endpoint = 'integrations/{}'.format(integration_id)
-        return self.make_request(method='PUT',endpoint=endpoint,data=integration_dict)
+        return self.make_request(method='PUT', endpoint=endpoint, data=integration_dict)
 
     def delete_integration(self, integration_id):
         endpoint = 'integrations/{}'.format(integration_id)
-        return self.make_request(method='DELETE',endpoint=endpoint)
+        return self.make_request(method='DELETE', endpoint=endpoint)
 
     def add_integration_metadata(self, integration_id, metadata_dict):
         endpoint = 'integrations/{}/metadata'.format(integration_id)
-        return self.make_request(method='POST',endpoint=endpoint,data=metadata_dict)
+        return self.make_request(method='POST', endpoint=endpoint, data=metadata_dict)
 
     def update_integration_metadata(self, integration_id, metadata_id, metadata_dict):
-        endpoint = 'integrations/{}/metadata/{}'.format(integration_id, metadata_id)
-        return self.make_request(method='PUT',endpoint=endpoint,data=metadata_dict)
+        endpoint = 'integrations/{}/metadata/{}'.format(
+            integration_id, metadata_id)
+        return self.make_request(method='PUT', endpoint=endpoint, data=metadata_dict)
 
     def delete_integration_metadata(self, integration_id, metadata_id):
-        endpoint = 'integrations/{}/metadata/{}'.format(integration_id, metadata_id)
-        return self.make_request(method='DELETE',endpoint=endpoint)
+        endpoint = 'integrations/{}/metadata/{}'.format(
+            integration_id, metadata_id)
+        return self.make_request(method='DELETE', endpoint=endpoint)
 
     def get_integration_interactions(self, integration_id):
         endpoint = 'integrations/{}/interactions'.format(integration_id)
@@ -172,14 +175,16 @@ class Playvox:
 
     def add_integration_interaction(self, integration_id, interaction_dict):
         endpoint = 'integrations/{}/interactions'.format(integration_id)
-        return self.make_request(method='POST',endpoint=endpoint,data=interaction_dict)
+        return self.make_request(method='POST', endpoint=endpoint, data=interaction_dict)
 
     def update_integration_interaction(self, integration_id, interaction_id, interaction_dict):
-        endpoint = 'integrations/{}/interactions/{}'.format(integration_id,interaction_id)
-        return self.make_request(method='PUT',endpoint=endpoint,data=interaction_dict)
+        endpoint = 'integrations/{}/interactions/{}'.format(
+            integration_id, interaction_id)
+        return self.make_request(method='PUT', endpoint=endpoint, data=interaction_dict)
 
     def delete_integration_interaction(self, integration_id, interaction_id):
-        endpoint = 'integrations/{}/interactions/{}'.format(integration_id, interaction_id)
+        endpoint = 'integrations/{}/interactions/{}'.format(
+            integration_id, interaction_id)
         return self.make_request(method='DELETE', endpoint=endpoint)
 
     def get_interaction_comments(self, interaction_id):
@@ -188,14 +193,16 @@ class Playvox:
 
     def add_interaction_comment(self, interaction_id, comment_dict):
         endpoint = 'interactions/{}/comments'.format(interaction_id)
-        return self.make_request(method='POST',endpoint=endpoint,data=comment_dict)
+        return self.make_request(method='POST', endpoint=endpoint, data=comment_dict)
 
     def update_interaction_comment(self, interaction_id, comment_id, comment_dict):
-        endpoint = 'interactions/{}/comments/{}'.format(interaction_id, comment_id)
+        endpoint = 'interactions/{}/comments/{}'.format(
+            interaction_id, comment_id)
         return self.make_request(method='PUT', endpoint=endpoint, data=comment_dict)
 
     def delete_interaction_comment(self, interaction_id, comment_id):
-        endpoint = 'interactions/{}/comments/{}'.format(interaction_id, comment_id)
+        endpoint = 'interactions/{}/comments/{}'.format(
+            interaction_id, comment_id)
         return self.make_request(method='DELETE', endpoint=endpoint)
 
     def create_bulk_interactions(self, integration_id, bulk_interactions_dict):
@@ -205,6 +212,3 @@ class Playvox:
     def get_bulk_job(self, job_id):
         endpoint = 'jobs/{}'.format(job_id)
         return self.make_request(endpoint=endpoint)
-    
-
-
