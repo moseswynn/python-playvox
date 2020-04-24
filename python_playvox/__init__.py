@@ -19,10 +19,10 @@ class Playvox:
             error_message = "{} is not a valid request method.".format(method)
             raise ValueError(error_message)
 
-    def make_querystring(parameters)
-    querystring = '?'
-    [querystring.append(k+'='+str(v)) for k, v in parameters]
-    return querystring
+    def make_querystring(parameters):
+        querystring = '?'
+        [querystring.append(k+'='+str(v)) for k, v in parameters]
+        return querystring
 
     def get_coachings(self, **kwargs):
         endpoint = 'coachings'
@@ -107,7 +107,7 @@ class Playvox:
 
     def get_users(self, **kwargs):
         endpoint = 'users'
-        if len(kwargs > 0):
+        if len(kwargs) > 0:
             endpoint.append(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
@@ -187,7 +187,7 @@ class Playvox:
         return self.make_request(method='DELETE', endpoint=endpoint)
 
     def get_interaction_comments(self, interaction_id):
-        endpoint = 'interactions/{}/comments'.format(interaction_id):
+        endpoint = 'interactions/{}/comments'.format(interaction_id)
         return self.make_request(endpoint=endpoint)
 
     def add_interaction_comment(self, interaction_id, comment_dict):

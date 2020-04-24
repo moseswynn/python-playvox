@@ -1,3 +1,4 @@
 *.toml
+*__pycache__/
 tests/
 dist/
