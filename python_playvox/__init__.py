@@ -7,13 +7,13 @@ class Playvox:
         self.url = 'https://{}.playvox.com/api/v1/'.format(pv_subdomain)
 
     def make_request(self, method='GET', endpoint=None, data=None):
-        if method = 'GET':
+        if method == 'GET':
             return requests.get(self.url+endpoint, auth=self.auth).json()
-        elif method = 'POST':
+        elif method == 'POST':
             return requests.post(self.url+endpoint, data=data, auth=self.auth).json()
-        elif method = 'PUT':
+        elif method == 'PUT':
             return requests.put(self.url+endpoint, data=data, auth=self.auth).json()
-        elif method = 'DELETE':
+        elif method == 'DELETE':
             return requests.delete(self.url+endpoint).json()
         else:
             error_message = "{} is not a valid request method.".format(method)
