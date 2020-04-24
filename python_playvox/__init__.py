@@ -22,7 +22,7 @@ class Playvox:
     def make_querystring(self, parameters):
         querystring = '?'
         for k, v in parameters.items():
-            querystring += k+'='+str(v)
+            querystring += k+'='+str(v)+'&'
         return querystring
 
     def get_coachings(self, **kwargs):
