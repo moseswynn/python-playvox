@@ -5,6 +5,7 @@ class Playvox:
     def __init__(self, pv_subdomain, uid, key):
         self.auth = (uid, key)
         self.url = 'https://{}.playvox.com/api/v1/'.format(pv_subdomain)
+        self.ui_api_url = 'https://{}.playvox.com/v1/'.format(pv_subdomain)
 
     def make_request(self, method='GET', endpoint=None, data=None):
         if method == 'GET':
@@ -15,6 +16,19 @@ class Playvox:
             return requests.put(self.url+endpoint, data=data, auth=self.auth).json()
         elif method == 'DELETE':
             return requests.delete(self.url+endpoint).json()
+        else:
+            error_message = "{} is not a valid request method.".format(method)
+            raise ValueError(error_message)
+    
+    def make_ui_api_request(self, method='GET', endpoint=None, data=None):
+        if method == 'GET':
+            return requests.get(self.ui_api_url+endpoint, auth=self.auth, data=None).json()
+        elif method == 'POST':
+            return requests.post(self.ui_api_url+endpoint, data=data, auth=self.auth).json()
+        elif method == 'PUT':
+            return requests.put(self.ui_api_url+endpoint, data=data, auth=self.auth).json()
+        elif method == 'DELETE':
+            return requests.delete(self.ui_api_url+endpoint).json()
         else:
             error_message = "{} is not a valid request method.".format(method)
             raise ValueError(error_message)
