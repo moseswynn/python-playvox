@@ -21,25 +21,25 @@ class Playvox:
 
     def make_querystring(parameters):
         querystring = '?'
-        [querystring.append(k+'='+str(v)) for k, v in parameters]
+        [querystring+(k+'='+str(v)) for k, v in parameters]
         return querystring
 
     def get_coachings(self, **kwargs):
         endpoint = 'coachings'
         if len(kwargs) > 0:
-            endpoint.append(self.make_querystring(kwargs))
+            endpoint+(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def get_learning_sessions(self, **kwargs):
         endpoint = 'learning-results'
         if len(kwargs) > 0:
-            endpoint.append(self.make_querystring(kwargs))
+            endpoint+(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def get_campaigns(self, **kwargs):
         endpoint = 'campaigns'
         if len(kwargs) > 0:
-            endpoint.append(self.make_querystring(kwargs))
+            endpoint+(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def get_campaign(self, campaign_id):
@@ -61,25 +61,25 @@ class Playvox:
     def get_calibrations(self, **kwargs):
         endpoint = 'calibrations'
         if len(kwargs) > 0:
-            endpoint.append(self.make_querystring(kwargs))
+            endpoint+(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def get_evaluations(self, **kwargs):
         endpoint = 'evaluations'
         if len(kwargs) > 0:
-            endpoint.append(self.make_querystring(kwargs))
+            endpoint+(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def get_scorecards(self, **kwargs):
         endpoint = 'scorecards'
         if len(kwargs) > 0:
-            endpoint.append(self.make_querystring(kwargs))
+            endpoint+(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def get_teams(self, **kwargs):
         endpoint = 'teams'
         if len(kwargs) > 0:
-            endpoint.append(self.make_querystring(kwargs))
+            endpoint+(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def create_new_team(self, team_dict):
@@ -108,7 +108,7 @@ class Playvox:
     def get_users(self, **kwargs):
         endpoint = 'users'
         if len(kwargs) > 0:
-            endpoint.append(self.make_querystring(kwargs))
+            endpoint+(self.make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def create_user(self, user_dict):
@@ -135,7 +135,7 @@ class Playvox:
     def get_roles(self, **kwargs):
         endpoint = 'roles'
         if len(kwargs) > 0:
-            endpoint.append(make_querystring(kwargs))
+            endpoint+(make_querystring(kwargs))
         return self.make_request(endpoint=endpoint)
 
     def get_integrations(self):
