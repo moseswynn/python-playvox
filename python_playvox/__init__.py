@@ -7,56 +7,43 @@ class Playvox:
         self.url = 'https://{}.playvox.com/api/v1/'.format(pv_subdomain)
         self.ui_api_url = 'https://{}.playvox.com/v1/'.format(pv_subdomain)
 
-    def make_request(self, method='GET', endpoint=None, data=None):
+    def make_request(self, method='GET', endpoint=None, data=None, params=None):
         if method == 'GET':
-            return requests.get(self.url+endpoint, auth=self.auth).json()
+            return requests.get(self.url+endpoint, auth=self.auth, params=params).json()
         elif method == 'POST':
-            return requests.post(self.url+endpoint, data=data, auth=self.auth).json()
+            return requests.post(self.url+endpoint, data=data, auth=self.auth, params=params).json()
         elif method == 'PUT':
-            return requests.put(self.url+endpoint, data=data, auth=self.auth).json()
+            return requests.put(self.url+endpoint, data=data, auth=self.auth, params=params).json()
         elif method == 'DELETE':
-            return requests.delete(self.url+endpoint).json()
+            return requests.delete(self.url+endpoint, params=params).json()
         else:
             error_message = "{} is not a valid request method.".format(method)
             raise ValueError(error_message)
     
-    def make_ui_api_request(self, method='GET', endpoint=None, data=None):
+    def make_ui_api_request(self, method='GET', endpoint=None, data=None, params=None):
         if method == 'GET':
-            return requests.get(self.ui_api_url+endpoint, auth=self.auth, data=None).json()
+            return requests.get(self.ui_api_url+endpoint, auth=self.auth, data=None, params=params).json()
         elif method == 'POST':
-            return requests.post(self.ui_api_url+endpoint, data=data, auth=self.auth).json()
+            return requests.post(self.ui_api_url+endpoint, data=data, auth=self.auth, params=params).json()
         elif method == 'PUT':
-            return requests.put(self.ui_api_url+endpoint, data=data, auth=self.auth).json()
+            return requests.put(self.ui_api_url+endpoint, data=data, auth=self.auth, params=params).json()
         elif method == 'DELETE':
-            return requests.delete(self.ui_api_url+endpoint).json()
+            return requests.delete(self.ui_api_url+endpoint, params=params).json()
         else:
             error_message = "{} is not a valid request method.".format(method)
             raise ValueError(error_message)
 
-    def make_querystring(self, parameters):
-        querystring = '?'
-        for k, v in parameters.items():
-            querystring += k+'='+str(v)+'&'
-        return querystring
-
     def get_coachings(self, **kwargs):
         endpoint = 'coachings'
-        if len(kwargs) > 0:
-            endpoint+=(self.make_querystring(kwargs))
-        return self.make_request(endpoint=endpoint)
+        return self.make_request(endpoint=endpoint, params=kwargs)
 
     def get_learning_sessions(self, **kwargs):
         endpoint = 'learning-results'
-        if len(kwargs) > 0:
-            endpoint+=(self.make_querystring(kwargs))
-        return self.make_request(endpoint=endpoint)
+        return self.make_request(endpoint=endpoint, params=kwargs)
 
     def get_campaigns(self, **kwargs):
         endpoint = 'campaigns'
-        if len(kwargs) > 0:
-            endpoint+=(self.make_querystring(kwargs))
-        print(endpoint)
-        return self.make_request(endpoint=endpoint)
+        return self.make_request(endpoint=endpoint, params=kwargs)
 
     def get_campaign(self, campaign_id):
         endpoint = 'campaigns/{}'.format(campaign_id)
@@ -76,27 +63,19 @@ class Playvox:
 
     def get_calibrations(self, **kwargs):
         endpoint = 'calibrations'
-        if len(kwargs) > 0:
-            endpoint+=(self.make_querystring(kwargs))
-        return self.make_request(endpoint=endpoint)
+        return self.make_request(endpoint=endpoint, params=kwargs)
 
     def get_evaluations(self, **kwargs):
         endpoint = 'evaluations'
-        if len(kwargs) > 0:
-            endpoint+=(self.make_querystring(kwargs))
-        return self.make_request(endpoint=endpoint)
+        return self.make_request(endpoint=endpoint, params=kwargs)
 
     def get_scorecards(self, **kwargs):
         endpoint = 'scorecards'
-        if len(kwargs) > 0:
-            endpoint+=(self.make_querystring(kwargs))
-        return self.make_request(endpoint=endpoint)
+        return self.make_request(endpoint=endpoint, params=kwargs)
 
     def get_teams(self, **kwargs):
         endpoint = 'teams'
-        if len(kwargs) > 0:
-            endpoint+=(self.make_querystring(kwargs))
-        return self.make_request(endpoint=endpoint)
+        return self.make_request(endpoint=endpoint, params=kwargs)
 
     def create_new_team(self, team_dict):
         endpoint = 'teams'
@@ -123,9 +102,7 @@ class Playvox:
 
     def get_users(self, **kwargs):
         endpoint = 'users'
-        if len(kwargs) > 0:
-            endpoint+=(self.make_querystring(kwargs))
-        return self.make_request(endpoint=endpoint)
+        return self.make_request(endpoint=endpoint, params=kwargs)
 
     def create_user(self, user_dict):
         endpoint = 'users'
