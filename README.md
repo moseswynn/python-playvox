@@ -64,7 +64,7 @@ This will create an instance of the wrapper that makes calls to 'https://mysubdo
 
 #### pv.coaching.get(**kwargs):
 
-Parametrs:
+Parameters:
 
 - include(string): use include='all' to include all coaching related objects information
 - page(int): page number for data pagination
@@ -289,6 +289,8 @@ Parameters:
   - kustomer
   - helpscout
   - helpshift
+
+*Returns True if the user was updated successfully, otherwise an error will be raised*
 
 #### pv.user.deactivate(user_id, deactivation_type, reason)
 

@@ -49,20 +49,16 @@ class Client:
 class Coaching(PlayvoxMixin):
     def get(self, **kwargs):
         '''
-        :param include: use include='all' to include all coaching related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing coachings data
-        :rtype: dict
+        Parametrs:
+
+        - include(string): use include='all' to include all coaching related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict of coaching data that match the specified parameters*
         '''
         return self.client.make_request(endpoint='coachings', params=kwargs)
 
@@ -70,20 +66,16 @@ class Coaching(PlayvoxMixin):
 class Learning(PlayvoxMixin):
     def get(self, **kwargs):
         '''
-        :param include: use include='all' to include all coaching related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing learning data
-        :rtype: dict
+        Parameters:
+
+        - include(string): use include='all' to include all learning related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict of learnings data that match the specified parameters*
         '''
         return self.client.make_request(endpoint='learning-results', params=kwargs)
 
@@ -91,20 +83,16 @@ class Learning(PlayvoxMixin):
 class Campaign(PlayvoxMixin):
     def get(self, campaign_id=None, **kwargs):
         '''
-        :param include: use include='all' to include all coaching related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing campaign data
-        :rtype: dict
+        Parameters:
+
+        - include(string): use include='all' to include all campaign related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict of campaign data that match the specified parameters*
         '''
         if not campaign_id:
             return self.client.make_request(endpoint='campaigns', params=kwargs)
@@ -114,32 +102,34 @@ class Campaign(PlayvoxMixin):
 
     def vars(self, campaign_id):
         '''
-        :param campaign_id: campaign ID to pull vars data for
-        :type campaign_id: string
-        :return: Response containing vars data for the specified campaign.
-        :rtype: dict
+        Parameters:
+
+        - campaign_id(string) *required*: campaign ID to pull vars data for
+
+        *Returns a dict containing vars data for the specified campaign*
         '''
         return self.client.make_request(endpoint='campaigns/{}/actions'
                                         .format(campaign_id), params={'o': 'vars-by-type'})
 
     def users(self, campaign_id):
         '''
-        :param campaign_id: campaign ID to pull users data for
-        :type campaign_id: string
-        :return: Response containing users data for the specified campaign.
-        :rtype: dict
+        Parameters:
+
+        - campaign_id(string) *required*: campaign ID to pull users data for
+
+        *Returns a dict containing users data for the specified campaign*
         '''
         return self.client.make_request(endpoint='campaigns/{}/actions'.format(campaign_id), params={
             'o': 'users'})
 
     def send_data(self, campaign_id, data):
         '''
-        :param campaign_id: campaign ID to send campaign metric data to
-        :param data: metric data to add to the campaign
-        :type campaign_id: string
-        :type data: dict or list[dict]
-        :return: Returns true if the data was successfully added, otherwise an error is raised.
-        :rtype: boolean
+        Parameters:
+
+        - campaign_id(string) *required*: id of campaign to send campaign metric data to
+        - data(dict or list[dict]) *required*: metric data to add to the campaign
+
+        *Returns True if the data was successfully added, otherwise an error is raised*
         '''
         res = self.client.make_request(method='POST',
                                        endpoint='campaigns/{}/metrics'.format(campaign_id), data=data)
@@ -155,20 +145,16 @@ class Campaign(PlayvoxMixin):
 class Calibration(PlayvoxMixin):
     def get(self, **kwargs):
         '''
-        :param include: use include='all' to include all calibration related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing calibration data
-        :rtype: dict
+        Parameters:
+
+        - include(string): use include='all' to include all calibration related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict of calibration data that match the specified parameters*
         '''
         return self.client.make_request(endpoint='calibrations', params=kwargs)
 
@@ -176,20 +162,16 @@ class Calibration(PlayvoxMixin):
 class Evaluation(PlayvoxMixin):
     def get(self, **kwargs):
         '''
-        :param include: use include='all' to include all evaluation related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing evaluations data
-        :rtype: dict
+        Parameters:
+
+        - include(string): use include='all' to include all evaluation related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict of evaluation data that match the specified parameters*
         '''
         return self.client.make_request(endpoint='evaluations', params=kwargs)
 
@@ -197,20 +179,16 @@ class Evaluation(PlayvoxMixin):
 class Scorecard(PlayvoxMixin):
     def get(self, **kwargs):
         '''
-        :param include: use include='all' to include all scorecard related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing scorecards data
-        :rtype: dict
+        Parameters:
+
+        - include(string): use include='all' to include all scorecard related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict of scorecard data that match the specified parameters*
         '''
         return self.client.make_request(endpoint='scorecards', params=kwargs)
 
@@ -218,35 +196,29 @@ class Scorecard(PlayvoxMixin):
 class Team(PlayvoxMixin):
     def get(self, **kwargs):
         '''
-        :param include: use include='all' to include all team related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing team data
-        :rtype: dict
+        Parameters:
+
+        - include(string): use include='all' to include all team related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict of team data that match the specified parameters*
         '''
         return self.client.make_request(endpoint='teams', params=kwargs)
 
     def new(self, name, description, team_leaders, users):
         '''
-        :param name: name of the new team
-        :param description: team description
-        :team_leaders: a list of the user ids of team leaders
-        :users: a list of the user ids of team members
-        :type name: string
-        :type description: string
-        :type team_leaders: list
-        :typer users: list
-        :return: The team ID of the new team.
-        :rtype: string
+        Parameters:
+
+        - name(string) *required*: name of the new team
+        - description(string): description of the new team
+        - team_leaders(list) *required*: a list of the user ids of team leaders
+        - users(list): a list of the user ids of team members
+
+        *Returns the id of the newly created team*
         '''
         payload = {
             'name': name,
@@ -263,16 +235,15 @@ class Team(PlayvoxMixin):
 
     def update(self, team_id, **kwargs):
         '''
-        :param name: the new name for the existing team
-        :param description: the new description for the existing team
-        :param team_leader_id: a list of user ids for team leaders to replace the current list
-        :param users: a list of user ids for users to replace the current list of users
-        :type name: string
-        :type description: string
-        :type team_leader_id: list
-        :type users: list
-        :return: Returns True if updated successfuly, otherwise an error will be raised.
-        :rtype: boolean
+        Parameters:
+
+        - team_id(string) *required*: the id of the team to be updated
+        - name(string): the new name of the team
+        - description(string): the new description for the team
+        - team_leader_id(list): a list of user ids for team leaders to replace the current list
+        - users(list): a list of user ids for users to replace the current list
+
+        *Returns True if successful, otherwise an error will be raised*
         '''
         res = self.client.make_request(method='POST', endpoint='teams/{}'.format(
             team_id), data=kwargs)
@@ -284,14 +255,13 @@ class Team(PlayvoxMixin):
 
     def add_user(self, team_id, user_id):
         '''
-        :param team_id: The id of the team that the user will be added to
-        :param user_id: The id of the user that will be added to the team
-        :type team_id: string
-        :type user_id: string
-        :return: Returns True if successful, otherwise an error will be raised.
-        :rtype: boolean
-        '''
+        Parameters:
 
+        - team_id(string) *required*: the id of the team the user will be added to
+        - user_id(string) *required*: the id of the user that will be added to the team
+
+        *Returns True if successful, otherwise an error will be raised*
+        '''
         res = self.client.make_request(method='POST', endpoint='teams/{}'.format(
             team_id), data={"id": user_id})
 
@@ -302,12 +272,12 @@ class Team(PlayvoxMixin):
 
     def remove_user(self, team_id, user_id):
         '''
-        :param team_id: the id of the team the user will be removed from
-        :param user_id: the id of the user to be removed from the team
-        :type team_id: string
-        :type user_id: string
-        :return: Returns True if successful, otherwise an error will be raised.
-        :rtype: boolean
+        Parameters:
+
+        - team_id(string) *required*: the id of the team that the user will be removed from
+        - user_id(string) *required*: the id of the user that will be removed from the team
+
+        *Returns True if successful, otherwise an error will be raised*
         '''
 
         res = self.client.make_request(method='DELETE',
@@ -320,12 +290,12 @@ class Team(PlayvoxMixin):
 
     def delete(self, team_id):
         '''
-        :param team_id: The id of the team to be deleted.
-        :type team_id: string
-        :return: Returns True if successful, otherwise an error will be raised.
-        :rtype: boolean
-        '''
+        Parameters:
 
+        - team_id(string) *required*: the id of the team that will be deleted
+
+        *Returns True if successful, otherwise an error will be raised*
+        '''
         res = self.client.make_request(method='DELETE', endpoint='teams/{}'.format(
             team_id))
 
@@ -338,39 +308,47 @@ class Team(PlayvoxMixin):
 class User(PlayvoxMixin):
     def get(self, **kwargs):
         '''
-        :param include: use include='all' to include all user related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing user data
-        :rtype: dict
+        Parameters:
+
+        - include(string): use include='all' to include all user related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict containing user data for the specified parameters*
         '''
         return self.client.make_request(endpoint='users', params=kwargs)
 
     def new(self, first_name, last_name, username, email, password, **kwargs):
         '''
-        :param first_name: the new user's first name
-        :param last_name: the new user's last name
-        :param username: the username the user will login with
-        :param email: the user's email address
-        :param password: the new user's password, at least 10 characters including a number, uppercase letter, and lowercase letter
-        :param integrations_{integration name}: the user's integration ID for the specified integration. Acceptable integration names include: five9, zendesk, desk, salesforce, livechat, ringcentral, intercom, freshdesk, talkdesk, zopim, kustomer, helpscout and helpshift.
-        :type first_name: string
-        :type last_name: string
-        :type username: string
-        :type email: string
-        :type password: string
-        :type integrations_{integration name}: string
-        :return: Returns the id of the new user
-        :rtype: string
+        Parameters:
+
+        - first_name(string) *required*: the new user's first name
+        - last_name(string) *required*: the new user's last name
+        - username(string) *required*: the username that the new user will login with
+        - email(string) *required*: the new user's email address
+        - password(string) *required*: the new user's password
+        - at least 10 characters
+        - 1 numer required
+        - 1 uppercase letter required
+        - 1 lowercase letter required
+        - integrations_{integration_name}(string): the user's integration ID for the specified integration, acceptable integration names include:
+        - five9
+        - zendesk
+        - salesforce
+        - livechat
+        - ringcentral
+        - intercom
+        - freshdesk
+        - talkdesk
+        - sopim
+        - kustomer
+        - helpscout
+        - helpshift
+
+        *Returns the id of the new user*
         '''
         payload = {
             'name': first_name,
@@ -393,16 +371,26 @@ class User(PlayvoxMixin):
 
     def update(self, user_id, **kwargs):
         '''
-        :param user_id: The id of the user to be updated
-        :param name: the new first name for the specified user
-        :param last_name: the new last name for the specified user
-        :param integrations_{integration name}: the user's integration ID for the specified integrations. available integration names include: five9, zendesk, desk, salesforce, livechat, ringcentral, intercom, freshdesk, talkdesk, zopim, kustomer, helpscout, and helpshift.
-        :type user_id: string
-        :type name: string
-        :type last_name: string
-        :type integrations_{integration name}: string
-        :return: Returns True if the user updated successfully, otherwise an error is raised.
-        :rtype: boolean
+        Parameters:
+
+        - user_id(string) *required*: the id of the user to be updated
+        - name(string): the new first name for the specified user
+        - last_name(string): the new last name for the specified user
+        - integrations_{integration_name}(string): the user's integration ID for the specified integration, acceptable integration names include:
+        - five9
+        - zendesk
+        - salesforce
+        - livechat
+        - ringcentral
+        - intercom
+        - freshdesk
+        - talkdesk
+        - sopim
+        - kustomer
+        - helpscout
+        - helpshift
+
+        *Returns True if the user was updated successfully, otherwise an error will be raised*
         '''
 
         res = self.client.make_request(endpoint='users/{}'.format(user_id),
@@ -415,14 +403,13 @@ class User(PlayvoxMixin):
 
     def deactivate(self, user_id, deactivation_type, reason):
         '''
-        :param user_id: the id of the user to be deactivated
-        :param deactivation_type: the type of deactivation
-        :param deactivation_reason: the reason for deactivation
-        :type user_id: string
-        :type deactivation_type: string
-        :type deactivation_reason: string
-        :return: Returns True if the user is successfuly deactivated, otherwise an error is raised.
-        :rtype: boolean
+        Parameters:
+
+        - user_id(string) *required*: the id of the user to be deactivated
+        - deactivation_type(string) *required*: the type of deactivation
+        - reason(string) *required*: the reason the user is being deactivated
+
+        *Returns True if successful, otherwise an error will be raised*
         '''
         payload = {
             "status": "inactive",
@@ -440,10 +427,11 @@ class User(PlayvoxMixin):
 
     def activate(self, user_id):
         '''
-        :param user_id: the id of a previously deactivated user to be activated
-        :type user_id: string
-        :return: Returns True if the user is successfully activated. Otherwise an error will be raised.
-        :rtype: boolean
+        Parameters:
+
+        - user_id(string) *required*: the id of a previously deactivated user to be activated
+
+        *Returns True if succesful, otherwise an error will be raised*
         '''
         payload = {
             "status": "active",
@@ -463,43 +451,37 @@ class User(PlayvoxMixin):
 class Role(PlayvoxMixin):
     def get(self, **kwargs):
         '''
-        :param include: use include='all' to include all role related objects information
-        :param page: page number for data pagination
-        :param per_page: number of resources per page for data pagination (max: 100, default: 12)
-        :param query: JSON specifying resource filters
-        :param fields: comma separated list of fields to be returned from the resource
-        :param sort: comma separated list of sort atributes. Use + as prefix for ascending and - as prefix for descending
-        :type include: string
-        :type page: int
-        :type per_page: int
-        :type query: string (json)
-        :type fields: string
-        :type sort: string:
-        :return: Response containing role data
-        :rtype: dict
+        Parameters:
+
+        - include(string): use include='all' to include all role related objects information
+        - page(int): page number for data pagination
+        - per_page(int): number of resources per page for data pagination
+        - query(string): JSON specifying resource filters
+        - fields(string): comma separated list of fields to be returned from the resource
+        - sort(string): comma separated list of sort attributes. Use + as prefix for ascending and - as prefix for descending
+
+        *Returns a dict of role data that match the specified parameters*
         '''
-        return self.client.make_request(endpoint='scorecards', params=kwargs)
+        return self.client.make_request(endpoint='roles', params=kwargs)
 
 
 class Integration(PlayvoxMixin):
     def get(self):
         '''
-        :return: Returns all available integrations
-        :rtype: dict
+        *Returns all available integrations*
         '''
-
         return self.client.make_request(endpoint='integrations')
 
     def new(self, name, description, data_storage_minutes):
         '''
-        :param name: name of the integration
-        :param description: description for the integration
-        :param data_storage_minutes: the time in minutes to retain data from the integration, Max: 129600 (90 days).
-        :type name: string
-        :type description: string
-        :type data_storage_minutes: int
-        :return: Returns the id of the newly created integration.
-        :rtype: string
+        Parameters:
+
+        - name(string) *required*: name for the new integration
+        - description(string) *required*: description for the new integration
+        - data_storage_minutes(int) *required*: the time in minutes to retain data from the integration
+          - Max: 129600(90 days)
+
+        *Returns the id of the newly created integration*
         '''
         payload = {
             'name': name,
@@ -519,18 +501,16 @@ class Integration(PlayvoxMixin):
 
     def update(self, integration_id, **kwargs):
         '''
-        :param integration_id: the id of the integration to be updated
-        :param name: new name for the specified integration
-        :param description: new description for the integration
-        :param data_storage_minutes: the time in minutes to retain data from the integration. Max: 129600 (90 days).
-        :type integration_id: string
-        :type name: string
-        :type description: string
-        :type data_storage_minutes: int
-        :return: returns True if successful, otherwise an error is raised.
-        :rtype: boolean
-        '''
+        Parameters:
 
+        - integration_id(string) *required*: the id of the integration to be updated
+        - name(string): a new name for the integration
+        - description(string): a new description for the integration
+        - data_storage_minutes(int): the time in minutes to retain data from the integration
+          - Max: 129600(90 days)
+
+        *Returns True if the specified integration is updated successfully, otherwise an error will be raised*
+        '''
         res = self.client.make_request(endpoint='integrations/{}'.format(
             integration_id), method='PUT', data=kwargs)
 
@@ -541,12 +521,12 @@ class Integration(PlayvoxMixin):
 
     def delete(self, integration_id):
         '''
-        :param integration_id: the ID of the integration to delete
-        :type integration_id: string
-        :return: returns True if the integration is deleted successfully, otherwise an error is raised.
-        :rtype: boolean
-        '''
+        Parameters:
 
+        - integration_id(string) *required*: the id of the integration to be deleted
+
+        *Returns True if the specified integration is deleted successfully, otherwise an error will be raised*
+        '''
         res = self.client.make_request(endpoint='integrations/{}'.format(
             integration_id), method='DELETE')
 
@@ -558,22 +538,28 @@ class Integration(PlayvoxMixin):
     def add_metadata(self, integration_id, field_id, m_type, allowed, required,
                     available_in):
         '''
-        :param integration_id: the id of the integration to which the metadata will be added
-        :param field_id: name to identify the field, a minimum of 3 characters and a maximum of 30 characters, ony a-z and underscores are accepted.
-        :param m_type: the type of the field. allowed values are string, integer, float, list, boolean, and datetime
-        :param allowed: the allowed values that the field will accept
-        :param required: specifies whether or not the field is required
-        :param available_in: specify if the field can be filtered or available to show in all fields, accepted values include 'filters' and 'display'
-        :type integration_id: string
-        :type field_id: string
-        :type m_type: string
-        :type allowed: list
-        :type required: boolean
-        :type available_in: list
-        :return: Returns the metadata_id if successful, otherwise an error is raised.
-        :rtype: string
-        '''
+        Parameters:
 
+        - integration_id(string) *required*: the id of the integration that the metadata field will be added to
+        - field_id(string) *required*: name to identify the metadata field
+            - Minimum 3 characters
+            - Maximum 30 characters
+            - Accepts only a-z and underscores
+        - m_type(string) *required*: the type of the field, allowed values:
+            - string
+            - integer
+            - float
+            - list
+            - boolean
+            - datetime
+        - allowed(list) *required*: the allowed values that the filed will accept
+        - required(boolean) *required*: specifies whether or not the field is required
+        - available_in(list[string]): specifies if the field can be filtered or shown in related data, accepts:
+            - 'filters'
+            - 'display'
+
+        *Returns the id of the new metadata field if successful, otherwise an error will be raised*
+        '''
         payload={
             'integration_id': integration_id,
             'field_id': field_id,
@@ -596,22 +582,28 @@ class Integration(PlayvoxMixin):
 
     def update_metadata(self, integration_id, metadata_id, **kwargs):
         '''
-        :param integration_id: the id of the integration that the metadata field exists on
-        :param metadata_id: the id of the metadata field that will be updated
-        :param field_id: name to identify the field, a minimum of 3 characters and a maximum of 30 characters, ony a-z and underscores are accepted.
-        :param m_type: the type of the field. allowed values are string, integer, float, list, boolean, and datetime
-        :param allowed: the allowed values that the field will accept
-        :param required: specifies whether or not the field is required
-        :param available_in: specify if the field can be filtered or available to show in all fields, accepted values include 'filters' and 'display'
-        :type integration_id: string
-        :type metadata_id: string
-        :type field_id: string
-        :type m_type: string
-        :type allowed: list
-        :type required: boolean
-        :type available_in: list
-        :return: returns True if successful, otherwise an error is raised.
-        :rtype: boolean
+        Parameters:
+
+        - integration_id(string) *required*: the id of the integration that the target metadata field exists on
+        - metadata_id(string) *required*: the id of the metadata field that will be updated
+        - field_id(string): name to identify the metadata field
+            - Minimum 3 characters
+            - Maximum 30 characters
+            - Accepts only a-z and underscores
+        - m_type(string): the type of the field, allowed values:
+            - string
+            - integer
+            - float
+            - list
+            - boolean
+            - datetime
+        - allowed(list): the allowed values that the filed will accept
+        - required(boolean): specifies whether or not the field is required
+        - available_in(list[string]): specifies if the field can be filtered or shown in related data, accepts:
+            - 'filters'
+            - 'display'
+
+        *Returns True if successful, otherwise an error will be raised*
         '''
         res = self.client.make_request(endpoint='integrations/{}/metadata/{}'\
             .format(integration_id, metadata_id), data=kwargs, method='PUT')
@@ -623,14 +615,13 @@ class Integration(PlayvoxMixin):
 
     def delete_metadata(self, integration_id, metadata_id):
         '''
-        :param integration_id: the id of the integration that the metadata field exists on
-        :param metadata_id: the id of the metadata field to be deleted
-        :type integration_id: string
-        :type metadata_id: string
-        :return: returns True if successful, otherwise an error is raised
-        :rtype: boolean
-        '''
+        Parameters:
 
+        - integration_id(string) *required*: the id of the integration that the target metadata field exists on
+        - metadata_id(string) *required*: the id of the metadata field to be deleted
+
+        *Returns True if successful, otherwise an error will be raised*
+        '''
         res = self.client.make_request(endpoint='integrations/{}/metadata/{}'\
             .format(integration_id, metadata_id), method='DELETE')
         
@@ -644,28 +635,27 @@ class Integration(PlayvoxMixin):
 class Interaction(PlayvoxMixin):
     def get(self, integration_id):
         '''
-        :param integration_id: The id of the integration to get interagions for.
-        :type integration_id: string
-        :return: returns all interactions for the specified integration
-        :rtype: dict
-        '''
+        Parameters:
 
+        - integration_id(string) *required* The id of the integration to get integrations for.
+
+        *Returns all interactions for the specified integration*
+        '''
         return self.client.make_request(endpoint='integrations/{}/interactions'\
             .format(integration_id))
 
     def add(self, integration_id, interaction_id, assignee_id, 
                         custom_metadata):
         '''
-        :param integration_id: The id of the integration the interaction will be added to.
-        :param interaction_id: the id of your external system, max length 68 characters.
-        :param assignee_id: the id of the user on the external system (should match email or username in playvox)
-        :param custom_metadata: The payload of all the metadata defined on the integration.
-        :type integration_id: string
-        :type interaction_id: string
-        :type assignee_id: string
-        :type custom_metadata: dict
-        :return: Returns the id of the new interaction
-        :rtype: string
+        Parameters:
+
+        - integration_id(string) *required*: The id of the integration the interaction will be added to.
+        - interaction_id(string): The id of your external system
+            - Max length: 68 characters
+        - assignee_id(string): The id of the user on the external system (should match email or username in playvox)
+        - custom_metadata(dict) *required*: The payload of all the metadata fields defined on the integration
+
+        *Returns the id of the new interaction*
         '''
         custom_metadata['interaction_id'] = interaction_id
         custom_metadata['assignee_id'] = assignee_id
@@ -680,16 +670,14 @@ class Interaction(PlayvoxMixin):
 
     def update(self, integration_id, interaction_id, data):
         '''
-        :param integration_id: the id of the integration the interaction exists on
-        :param interaction_id: the id of the interaction to update
-        :param data: the data to be updated on the interaction
-        :type integration_id: string
-        :type interaction_id: string
-        :type data: dict
-        :return: returns True if the interaction is update successfully, otherwise an error will be raised
-        :rtype: boolean
-        '''
+        Parameters:
 
+        - integration_id(string) *required*: the id of the integration the target interaction exists on
+        - interaction_id(string) *required*: the id of the interaction to be updated
+        - data(dict) *required*: The payload of the metadata fields to be updated
+
+        *Returns True if successful, otherwise an error will be raised*
+        '''
         res = self.client.make_request(endpoint='integrations/{}/interactions/{}'\
             .format(integration_id, interaction_id), data=data, method='PUT')
 
@@ -700,14 +688,13 @@ class Interaction(PlayvoxMixin):
 
     def delete(self, integration_id, interaction_id):
         '''
-        :param integration_id: the id of the integration the interaction exists on
-        :param interaction_id: the id of the interaction to delete
-        :type integration_id: string
-        :type interaction_id: string
-        :return: returns True if the interaction is deleted successfully, otherwise an error is raised
-        :rtype: boolean
-        '''
+        Parameters:
 
+        - integration_id(string) *required*: the id of the integration the target interaction exists on
+        - interaction_id(string) *required*: the id of the interaction to be deleted
+
+        *Returns True if successful, otherwise an error will be raised*
+        '''
         res = self.client.make_request(endpoint='integrations/{}/interactions/{}'\
             .format(integration_id, interaction_id, method='DELETE'))
 
@@ -718,30 +705,30 @@ class Interaction(PlayvoxMixin):
 
     def get_comments(self, interaction_id):
         '''
-        :param interaction_id: the id of the interaction to get comments for
-        :type interaction_id: string
-        :return: returns all comments associated with the interaction
-        :rtype: dict
-        '''
+        Parameters:
 
+        - interaction_id(string) *required*: the id of the interaction to get comments for
+
+        *Returns all comments associated with the interaction*
+        '''
         return self.client.make_request(endpoint='interactions/{}/comments'\
             .format(interaction_id))
 
     def add_comment(self, interaction_id, body, comment_type, author_id,
                     comment_dt=None):
         '''
-        :param interaction_id: the id of the interaction to add the comment to
-        :param body: the body of the comment
-        :param comment_type: the type of the comment, accepted values are customer_comment, agent_comment, and internal_note
-        :param author_id: the username or email of the author on playvox
-        :param comment_dt: the time that the comment was added to the interaction, defaults to current time if not specified
-        :type interaction_id: string
-        :type body: string
-        :type comment_type: string
-        :type author_id" string
-        :type comment_dt: datetime
-        :return: returns the id of the newly created comment
-        :rtype: string
+        Parameters:
+
+        - interaction_id(string) *required*: the id of the interaction the comment will be added to
+        - body(string) *required*: the body of the comment
+        - comment_type(string) *required*: the type of comment, accepts:
+            - 'customer_comment'
+            - 'agent_comment'
+            - 'internal_note'
+        - author_id(string) *required*: the username or email of the author on playvox
+        - comment_dt(datetime): the time that the comment was added to the interaction, defaults to current time if not specified
+
+        *Returns the id of the newly created comment*
         '''
         data = {
             'body': body,
@@ -761,16 +748,14 @@ class Interaction(PlayvoxMixin):
 
     def update_comment(self, interaction_id, comment_id, body, comment_dt=None):
         '''
-        :param interaction_id: the interaction that the comment is associated with
-        :param comment_id: the id of the comment to be updated
-        :param body: the new body of the comment
-        :param comment_dt: the time that the comment was updated, defaults to current time if not specified
-        :type interaction_id: string
-        :type comment_id: string
-        :type body: string
-        :type comment_dt: datetime
-        :return: returns True if the comment is updated successfully, otherwise an error is raised
-        :rtype: boolean
+        Parameters:
+
+        - interaction_id(string) *required*: the id of the interaction that the comment is associated with
+        - comment_id(string) *required*: the id of the comment to be updated
+        - body(string) *required*: the new body of the comment
+        - comment_dt(datetime): the time that the comment was updated, defaults to current time if not specified
+
+        *Returns True if the comment is updated successfully, otherwise an error will be raised*
         '''
         data = {
             'body': body,
@@ -789,12 +774,12 @@ class Interaction(PlayvoxMixin):
 
     def delete_comment(self, interaction_id, comment_id):
         '''
-        :param interaction_id: the interaction that the comment is associated with
-        :param comment_id: the id of the comment to be deleted
-        :type interaction_id: string
-        :type comment_id: string
-        :return: returns True if successful, otherwise an error is raised
-        :rtype: boolean
+        Parameters:
+
+        - interaction_id(string) *required*: the id of the interaction that the target comment is associated with
+        - comment_id(string) *required*: the id of the comment to be deleted
+
+        *Returns True if the comment is deleted successfully, otherwise an error will be raised*
         '''
 
         res = self.client.make_request(endpoint='interactions/{}/comments/{}'\
@@ -807,12 +792,12 @@ class Interaction(PlayvoxMixin):
 
     def bulk_add(self, integration_id, interactions):
         '''
-        :param integration_id: the id of the integration that the interactions will be added to
-        :param interactions: the interactions to be added to the integration, for more information see https://developers.playvox.com/restapis/#/reference/0/bulk-interactions/create
-        :type integration_id: string
-        :type interactions: list[dict]
-        :return: returns the job id of the bulk job
-        :rtype: string
+        Parameters:
+
+        - integration_id(string) *required*: the id of the integration that the interactions will be added to
+        - interactions(dict) *required*: the interactions to be added to the integration, for more information see the [Playvox API Documentation](https://developers.playvox.com/restapis/#/reference/0/bulk-interactions/create)
+
+        *Returns the job id of the bulk job*
         '''
 
         res = self.client.make_request(endpoint='integrations/{}/bulk/interactions'\
@@ -825,9 +810,10 @@ class Interaction(PlayvoxMixin):
 
     def bulk_status(self, job_id):
         '''
-        :param job_id: the id of the bulk job to check the status of
-        :type job_id: string
-        :return: returns information on the specified bulk job
-        :rtype: dict
+        Parameters:
+
+        - job_id(string) *required*: the id of the bulk job to check the status of
+
+        *Returns status information on the specified bulk job*
         '''
         return self.client.make_request(endpoint='jobs/{}'.format(job_id))
